@@ -1,0 +1,161 @@
+<!-- <!DOCTYPE html>
+<html >
+<head>
+<title>ECG - Timeseries Anomaly Detection</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<!-- Mobile Metas -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<link rel="shortcut icon" href="../static/images/ecg.png" type="">
+
+<!-- bootstrap core css -->
+<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.css" />
+<!-- font awesome style -->
+<link href="../static/css/font-awesome.min.css" rel="stylesheet" />
+<!-- Custom styles for this template -->
+<link href="../static/css/style.css" rel="stylesheet" />
+<!-- responsive style -->
+<link href="../static/css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+     <!-- header section strats -->
+     <header class="header_section">
+        <div class="container">
+           <nav class="navbar navbar-expand-lg custom_nav-container ">
+              <a class="navbar-brand" href="index.html"><img width="250" src="../static/images/logo.png" alt="#" /></a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link">Machine Learning with Deep Neural Networks</a>
+                    </li>               
+                 </ul>
+              </div>
+           </nav>
+        </div>
+     </header>
+     <!-- end header section -->
+  </div>
+  <!-- inner page section -->
+  <section class="inner_page_head">
+     <div class="container_fuild">
+        <div class="row">
+           <div class="col-md-12">
+              <div class="full">
+                  <h4>Timeseries Anomaly Detection</h4>
+              </div>
+           </div>
+        </div>
+     </div>
+  </section>
+  <!-- end inner page section -->
+  <!-- client section -->
+  <section class="client_section layout_padding">
+     <div class="container">
+        <div class="heading_container heading_center">
+           <h4>
+              ECG Results 
+           </h4>
+        </div>
+        <div id="carouselExample3Controls">
+           <div class="carousel-inner">
+              
+                 <div class="box col-lg-10 mx-auto">
+                    <div class="img_container">
+                       <div class="img-box">
+                          <!-- <div class="img_box-inner"> -->
+                           
+                           <h4 id="grtmsg" style="color:royalblue"> {{ msg }}</h4>  
+                          <!-- </div> -->
+                       </div>
+                    </div>
+                    <div class="detail-box">
+                   
+                      
+                          <div>
+                            <form action="{{url_for('predict')}}"method="post">
+                             <div class="form-group">
+                              <input type="submit" id="btnLoad" value="Load Model" class="btn btn-sm btn-primary"/>
+                              
+                             </div>
+                             <div class="form-group">
+                               
+                             </div>
+                           </form>
+
+                         
+                          </div>
+                        
+                       <p>
+                      
+                       </p>
+                    </div>
+                 </div>
+                     
+            
+           </div>           
+        </div>
+     </div>
+  </section>
+  <!-- end client section -->
+  <!-- footer section -->
+  <footer class="footer_section">
+     <div class="container">
+        <div class="row">
+          
+           <div class="col-md-8 footer-col">
+              <div class="footer_detail">
+                 <a href="#">
+                 Group 2 - Memebers
+                 </a>
+                 <p>
+                     Chathuranga Sandaruwan Kangara (K2377318) <br>
+                     Suresh Athula Jayasinghe (K2377325) <br>
+                     Gayanath Perera (K2377330) <br>
+                     Kelum Dushantha Tennakoon (K2377338) <br>
+                </p>
+                
+              </div>
+           </div>
+           <div class="col-md-4 footer-col">
+              <div class="map_container">
+                 <div class="map">
+                    <div id="googleMap"></div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="footer-info">
+           <div class="col-lg-7 mx-auto px-0">
+               <p>
+                   CI7520 Assignment 2 - Machine Learning with Deep Neural Networks
+               </p>
+           </div>
+        </div>
+     </div>
+  </footer>
+
+</body>
+</html> 
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<script>
+
+   $("#btnGrt").click(function(event){
+      let msg = {
+         name:  $("#txtName").val()
+      }
+      $.post("http://127.0.0.1:5000/welcome", JSON.stringify(msg), function(response) {
+         $("#grtmsg").text(response.greeting);
+         console.log(response)
+
+      });
+   });
+</script>
