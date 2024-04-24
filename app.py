@@ -23,7 +23,7 @@ def index():
 @app.route('/predict', methods = ["POST"])
 def predict():
 
-    api_url = "https://mlcw2-api.onrender.com/GetData?Fraction=0.1"    
+    api_url = "https://mlcw2-api.onrender.com/GetData?Fraction=0.02"    
     while True:
         message = ""   
 
