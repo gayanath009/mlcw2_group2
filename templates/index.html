@@ -68,32 +68,18 @@
                  <div class="box col-lg-10 mx-auto">
                     <div class="img_container">
                        <div class="img-box">
-                          <!-- <div class="img_box-inner"> -->
-                           
-                           <h4 id="grtmsg" style="color:royalblue"> {{ msg }}</h4>  
-                          <!-- </div> -->
+                        
+                        <h4 id="grtmsg"> </h4>  
                        </div>
                     </div>
                     <div class="detail-box">
-                   
-                      
                           <div>
-                            <form action="{{url_for('predict')}}"method="post">
-                             <div class="form-group">
-                              <input type="submit" id="btnLoad" value="Load Model" class="btn btn-sm btn-primary"/>
-                              
-                             </div>
-                             <div class="form-group">
-                               
-                             </div>
-                           </form>
-
-                         
+                              Data Sample Size
+                              <input id="txtFrctn" type="text" class="form-control form-control-sm" value="0.03">                               
+                          </div>  
+                          <div>
+                           Note : Sepecify small fraction as there are limitations on server resources with the free render.com service.
                           </div>
-                        
-                       <p>
-                      
-                       </p>
                     </div>
                  </div>
                      
@@ -147,15 +133,30 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 <script>
+ $(document).ready(function(){   
+   setInterval(predict, 5000); //Set predict function to repeat every 5 seconds
+ });
 
-   $("#btnGrt").click(function(event){
-      let msg = {
-         name:  $("#txtName").val()
-      }
-      $.post("http://127.0.0.1:5000/welcome", JSON.stringify(msg), function(response) {
-         $("#grtmsg").text(response.greeting);
-         console.log(response)
+ function predict() {
 
-      });
-   });
+   var frctn = $('#txtFrctn').val(); 
+   var dataSend = { 'frctn': frctn }; 
+   
+   
+   $.ajax({
+            url: '/predict',
+            type: 'POST',
+            contentType: 'application/json', 
+            data: JSON.stringify(dataSend), 
+            success: function(response) {               
+                console.log(response);
+                $('#grtmsg').text(response.message); 
+                $('#grtmsg').css('color', response.color);
+            },
+            error: function(error) {                
+                console.log(error);
+            }
+        });   
+ }
+
 </script>
