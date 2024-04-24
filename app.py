@@ -19,22 +19,23 @@ app = Flask(__name__)
 def index(): 
    return render_template ("index.html")
 
+
 @app.route('/predict', methods = ["POST"])
 def predict():
-    ecg_file_name = "dataset/ecg2.csv"   
-    rcds_size = 500  
+
+    api_url = "https://mlcw2-api.onrender.com/GetData?Fraction=0.1"    
     while True:
         message = ""   
-        ecg_file_name = "dataset/ecg2.csv"  
 
-        dataChunk = pd.read_csv(ecg_file_name)
-        dataChunk = dataChunk.sample(frac=.5)
+        response = requests.get(api_url)
+        dataChunk = pd.DataFrame(response.json())
         dataChunk.dropna() # drop null values 
         dataChunk.drop_duplicates() # drop duplicates 
+        dataChunk.iloc[:, -1] = dataChunk.iloc[:, -1].apply(lambda x: 0 if x != 1 else x)
 
         anomalies, y_preds, y_pred_classes, accuracy, f1, precision = anomalyV2(dataChunk)
 
-        #print("Anomaly ECGs :", np.sum(anomalies.numpy()))
+        #print("Anomaly ECGs :", np.sum(anomalies.numpy())) 
         #print("Normal ECGs :", len(anomalies) - np.sum(anomalies.numpy()))
         #print ("Accuracy : " , accuracy)
         #print ("F1 : " , f1)
@@ -46,8 +47,7 @@ def predict():
            message = f'Anomalies Detected - Anomaly ECGs :  {str(anamolies)} | Normal ECGs : {str(normal)}'
         else :         
            message = "No Anomalies Found"  
-        return render_template('index.html',  msg =message)           
-
+        return render_template('index.html',  msg =message)  
 
 # Setting other anomaly classes also to 0
 def ecgclass(classId):
