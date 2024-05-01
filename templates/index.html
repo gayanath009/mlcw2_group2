@@ -24,7 +24,9 @@
      <!-- header section strats -->
      <header class="header_section">
         <div class="container">
-           <nav class="navbar navbar-expand-lg custom_nav-container ">
+         <img width="250" src="../static/images/logo.png" alt="#" />
+         <a class="nav-link">Machine Learning with Deep Neural Networks</a>
+           <!-- <nav class="navbar navbar-expand-lg custom_nav-container ">
               <a class="navbar-brand" href="index.html"><img width="250" src="../static/images/logo.png" alt="#" /></a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""> </span>
@@ -36,7 +38,7 @@
                     </li>               
                  </ul>
               </div>
-           </nav>
+           </nav> -->
         </div>
      </header>
      <!-- end header section -->
@@ -46,8 +48,8 @@
      <div class="container_fuild">
         <div class="row">
            <div class="col-md-12">
-              <div class="full">
-                  <h4>Timeseries Anomaly Detection</h4>
+              <div class="header">                   
+                  <h5>Timeseries Anomaly Detection</h4>
               </div>
            </div>
         </div>
@@ -56,21 +58,26 @@
   <!-- end inner page section -->
   <!-- client section -->
   <section class="client_section layout_padding">
-     <div class="container">
-        <div class="heading_container heading_center">
-           <h4>
+     <!-- <div class="container"> -->
+        <!-- <div class="heading_container heading_center">
+           <h5>
               ECG Results 
-           </h4>
-        </div>
+           </h5>
+        </div> -->
         <div id="carouselExample3Controls">
            <div class="carousel-inner">
               
                  <div class="box col-lg-10 mx-auto">
                     <div class="img_container">
-                       <div class="img-box">
-                        
-                        <h4 id="grtmsg"> </h4>  
-                       </div>
+                       <div class="img-box"><h5 id="grtmsg"></h4></div>
+                          
+                    </div>
+                    <div class="img_container">
+                        <div class="img-box"><h5 id="bestmodel" style="color:lightseagreen;"></h5></div>
+                    </div>
+                    <div class="img_container">
+                        <img id="imgcnfnMtrx"  alt="Confusion Matrix">
+
                     </div>
                     <div class="detail-box">
                           <div>
@@ -86,7 +93,7 @@
             
            </div>           
         </div>
-     </div>
+     <!-- </div> -->
   </section>
   <!-- end client section -->
   <!-- footer section -->
@@ -152,6 +159,9 @@
                 console.log(response);
                 $('#grtmsg').text(response.message); 
                 $('#grtmsg').css('color', response.color);
+                $('#bestmodel').text(response.bestmodel);
+                //var imagePath = response.cnfn_mtrx;
+                $('#imgcnfnMtrx').attr('src', response.cnfn_mtrx);
             },
             error: function(error) {                
                 console.log(error);
